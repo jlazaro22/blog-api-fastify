@@ -30,9 +30,7 @@ export const serverOptions: FastifyServerOptions = {
 export function customErrorHandler() {
   app.setErrorHandler((err, request, reply) => {
     if (err instanceof ZodError) {
-      return reply
-        .status(400)
-        .send({ message: 'Validation error', issues: err });
+      return reply.code(400).send({ message: 'Validation error', issues: err });
     }
 
     if (err.statusCode === 429) {

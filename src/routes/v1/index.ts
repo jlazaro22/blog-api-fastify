@@ -1,4 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { authRoutes } from './auth.js';
 
 export async function v1Routes(app: FastifyInstance) {
   app.get('/', (request: FastifyRequest, reply: FastifyReply) => {
@@ -10,4 +11,6 @@ export async function v1Routes(app: FastifyInstance) {
       timestamp: new Date().toISOString(),
     });
   });
+
+  app.register(authRoutes, { prefix: '/auth' });
 }
