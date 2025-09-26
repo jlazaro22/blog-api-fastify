@@ -5,7 +5,6 @@ import z from 'zod';
 import { app } from '../../../app.js';
 import { env } from '../../../env/index.js';
 import { generateAccessToken, generateRefreshToken } from '../../../lib/jwt.js';
-import Token from '../../../models/token.js';
 import User from '../../../models/user.js';
 
 export async function login(
@@ -46,19 +45,6 @@ export async function login(
 
     const accessToken = await generateAccessToken(reply, user._id, user.role);
     const refreshToken = await generateRefreshToken(reply, user._id, user.role);
-
-    // await Token.create({
-    //   token: refreshToken,
-    //   userId: user._id,
-    // });
-
-    // app.log.info(
-    //   {
-    //     userId: user._id,
-    //     token: refreshToken,
-    //   },
-    //   'Refresh token created.',
-    // );
 
     app.log.info(
       {
