@@ -1,5 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { authRoutes } from './auth.js';
+import { userRoutes } from './user.js';
 
 export async function v1Routes(app: FastifyInstance) {
   app.get('/', (request: FastifyRequest, reply: FastifyReply) => {
@@ -13,4 +14,5 @@ export async function v1Routes(app: FastifyInstance) {
   });
 
   app.register(authRoutes, { prefix: '/auth' });
+  app.register(userRoutes, { prefix: '/users' });
 }
