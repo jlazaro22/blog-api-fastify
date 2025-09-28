@@ -1,33 +1,35 @@
 import { FastifyReply, FastifyRequest, FastifyServerOptions } from 'fastify';
-
 import { ZodError } from 'zod';
-import { app } from '../app.js';
-import { env } from '../env/index.js';
-import { rateLimitOptions } from './rate-limit.js';
 
-function getLoggerOptions() {
+import { app } from '../app';
+import { env } from '../env';
+import { rateLimitOptions } from './rate-limit';
+
+export function getLoggerOptions() {
+  let serverOptions: FastifyServerOptions = {};
+
   if (process.stdout.isTTY) {
-    return {
-      enabled: env.NODE_ENV === 'development',
-      transport: {
-        target: 'pino-pretty',
-        options: {
-          translateTime: 'dd-mm-yyyy HH:MM:ss',
-          colorize: true,
-          ignore: 'pid,hostname',
+    serverOptions = {
+      logger: {
+        enabled: env.NODE_ENV === 'development',
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            translateTime: 'dd-mm-yyyy HH:MM:ss',
+            colorize: true,
+            ignore: 'pid,hostname',
+          },
         },
       },
     };
+  } else {
+    serverOptions = { logger: { level: env.LOG_LEVEL ?? 'silent' } };
   }
 
-  return { logger: { level: env.LOG_LEVEL ?? 'silent' } };
+  return serverOptions;
 }
 
-export const serverOptions: FastifyServerOptions = {
-  logger: getLoggerOptions(),
-};
-
-export function customErrorHandler() {
+export async function customErrorHandler() {
   app.setErrorHandler((err, request, reply) => {
     if (err instanceof ZodError) {
       return reply.code(400).send({ message: 'Validation error', issues: err });

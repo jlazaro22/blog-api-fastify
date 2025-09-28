@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { IUser } from '../models/user.js';
+
+import { IUser } from '../models/user';
 
 export function authorize(roles: IUser['role'][]) {
   return async (request: FastifyRequest, reply: FastifyReply) => {

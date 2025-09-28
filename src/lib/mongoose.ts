@@ -1,7 +1,7 @@
 import mongoose, { ConnectOptions } from 'mongoose';
 
-import { app } from '../app.js';
-import { env } from '../env/index.js';
+import { app } from '../app';
+import { env } from '../env';
 
 const clientOptions: ConnectOptions = {
   dbName: 'blog-api-db',

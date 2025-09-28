@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { app } from '../app.js';
+import { app } from '../app';
 
 export async function authenticate(
   request: FastifyRequest,
