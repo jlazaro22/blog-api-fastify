@@ -73,7 +73,7 @@ export async function updateCurrentUser(
 
     return reply.code(200).send({ user });
   } catch (err) {
-    app.log.error(err, 'Error while getting the current user.');
+    app.log.error(err, 'Error while updating the current user.');
 
     return reply.code(500).send({
       code: 'ServerError',

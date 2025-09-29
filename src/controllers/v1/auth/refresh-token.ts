@@ -37,7 +37,7 @@ export async function refreshToken(
         accessToken,
       });
   } catch (err) {
-    app.log.error(err, 'Error during authentication.');
+    app.log.error(err, 'Error during  refresh token.');
     return reply.code(401).send({ message: 'Unauthorized.' });
   }
 }
