@@ -7,7 +7,7 @@ export async function getCurrentUser(
   request: FastifyRequest,
   reply: FastifyReply,
 ): Promise<void> {
-  const { sub: userId } = request.user;
+  const userId = request.user.sub;
 
   try {
     const user = await User.findById(userId).select('-__v').lean().exec();

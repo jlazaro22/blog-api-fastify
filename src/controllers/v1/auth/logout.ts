@@ -8,7 +8,7 @@ export async function logout(
   request: FastifyRequest,
   reply: FastifyReply,
 ): Promise<void> {
-  const { sub: userId } = request.user;
+  const userId = request.user.sub;
 
   try {
     await Token.deleteMany({ userId });

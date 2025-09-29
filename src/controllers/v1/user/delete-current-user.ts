@@ -8,7 +8,7 @@ export async function deleteCurrentUser(
   request: FastifyRequest,
   reply: FastifyReply,
 ): Promise<void> {
-  const { sub: userId } = request.user;
+  const userId = request.user.sub;
 
   try {
     // TODO: delete <blogs> created by the user and corresponding <banner> images uploaded to cloudinary
