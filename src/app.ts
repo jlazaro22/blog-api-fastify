@@ -7,11 +7,11 @@ import fastifyJwt from '@fastify/jwt';
 import fastifyRateLimit from '@fastify/rate-limit';
 import fastify, { FastifyInstance } from 'fastify';
 
-import { corsOptions } from './lib/cors';
-import { customErrorHandler, getLoggerOptions } from './lib/fastify';
-import { jwtOptions } from './lib/jwt';
-import { rateLimitOptions } from './lib/rate-limit';
-import { v1Routes } from './routes/v1';
+import { corsOptions } from 'lib/cors';
+import { customErrorHandler, getLoggerOptions } from 'lib/fastify';
+import { jwtOptions } from 'lib/jwt';
+import { rateLimitOptions } from 'lib/rate-limit';
+import { v1Routes } from 'routes/v1';
 
 export const app: FastifyInstance = await fastify(getLoggerOptions());
 
@@ -29,4 +29,4 @@ await app.register(fastifyRateLimit, rateLimitOptions);
 app.register(v1Routes, { prefix: '/api/v1' });
 
 // *** Error handling ***
-app.setErrorHandler(customErrorHandler);
+customErrorHandler();

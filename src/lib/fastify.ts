@@ -1,8 +1,8 @@
 import { FastifyReply, FastifyRequest, FastifyServerOptions } from 'fastify';
 import { ZodError } from 'zod';
 
-import { app } from '../app';
-import { env } from '../env';
+import { env } from 'env';
+import { app } from 'app';
 import { rateLimitOptions } from './rate-limit';
 
 export function getLoggerOptions() {

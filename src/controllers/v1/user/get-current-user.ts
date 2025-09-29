@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { app } from '../../../app';
-import User from '../../../models/user';
+import { app } from 'app';
+import User from 'models/user';
 
 export async function getCurrentUser(
   request: FastifyRequest,

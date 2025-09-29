@@ -2,10 +2,10 @@ import { FastifyJWTOptions } from '@fastify/jwt';
 import { FastifyReply } from 'fastify';
 import { Types } from 'mongoose';
 
-import { app } from '../app';
-import { env } from '../env';
-import Token from '../models/token';
-import { IUser } from '../models/user';
+import { app } from 'app';
+import { env } from 'env';
+import Token from 'models/token';
+import { IUser } from 'models/user';
 
 export const jwtOptions: FastifyJWTOptions = {
   secret: env.JWT_SECRET,

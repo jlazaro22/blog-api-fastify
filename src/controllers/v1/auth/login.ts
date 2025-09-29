@@ -2,10 +2,10 @@ import { compare } from 'bcryptjs';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import z from 'zod';
 
-import { app } from '../../../app';
-import { env } from '../../../env';
-import { generateAccessToken, generateRefreshToken } from '../../../lib/jwt';
-import User from '../../../models/user';
+import { app } from 'app';
+import { env } from 'env';
+import { generateAccessToken, generateRefreshToken } from 'lib/jwt';
+import User from 'models/user';
 
 export async function login(
   request: FastifyRequest,

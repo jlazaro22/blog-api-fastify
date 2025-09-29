@@ -1,8 +1,8 @@
 import closeWithGrace from 'close-with-grace';
 
-import { app } from './app';
-import { env } from './env';
-import { connectToDatabase, disconnectFromDatabase } from './lib/mongoose';
+import { app } from 'app';
+import { env } from 'env';
+import { connectToDatabase, disconnectFromDatabase } from 'lib/mongoose';
 
 (async () => {
   try {

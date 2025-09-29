@@ -1,8 +1,7 @@
 import { FastifyCorsOptions } from '@fastify/cors';
-
-import { app } from '../app';
-import config from '../config';
-import { env } from '../env';
+import { app } from 'app';
+import config from 'config';
+import { env } from 'env';
 
 export const corsOptions: FastifyCorsOptions = {
   origin(origin, callback) {

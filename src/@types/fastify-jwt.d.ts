@@ -1,6 +1,6 @@
 import '@fastify/jwt';
 
-import { IUser } from '../models/user';
+import { IUser } from 'models/user';
 
 declare module '@fastify/jwt' {
   export interface FastifyJWT {

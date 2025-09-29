@@ -1,10 +1,10 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import z from 'zod';
 
-import { app } from '../../../app';
-import config from '../../../config';
-import User from '../../../models/user';
-import { generateUsername } from '../../../utils';
+import { app } from 'app';
+import config from 'config';
+import User from 'models/user';
+import { generateUsername } from 'utils';
 
 export async function register(
   request: FastifyRequest,

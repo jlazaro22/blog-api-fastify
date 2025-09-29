@@ -1,8 +1,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { app } from '../../../app';
-import { env } from '../../../env';
-import Token from '../../../models/token';
+import { app } from 'app';
+import { env } from 'env';
+import Token from 'models/token';
 
 export async function logout(
   request: FastifyRequest,

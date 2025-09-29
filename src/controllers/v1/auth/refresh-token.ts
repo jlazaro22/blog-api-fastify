@@ -1,9 +1,9 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { Types } from 'mongoose';
 
-import { app } from '../../../app';
-import { env } from '../../../env';
-import { generateAccessToken, generateRefreshToken } from '../../../lib/jwt';
+import { app } from 'app';
+import { env } from 'env';
+import { generateAccessToken, generateRefreshToken } from 'lib/jwt';
 
 export async function refreshToken(
   request: FastifyRequest,
