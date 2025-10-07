@@ -4,6 +4,7 @@ import { authRoutes } from './auth';
 import { userRoutes } from './user';
 import { blogRoutes } from './blog';
 import { likeRoutes } from './like';
+import { commentRoutes } from './comment';
 
 export async function v1Routes(app: FastifyInstance) {
   app.get('/', (request: FastifyRequest, reply: FastifyReply) => {
@@ -20,4 +21,5 @@ export async function v1Routes(app: FastifyInstance) {
   app.register(userRoutes, { prefix: '/users' });
   app.register(blogRoutes, { prefix: '/blogs' });
   app.register(likeRoutes, { prefix: '/likes' });
+  app.register(commentRoutes, { prefix: '/comments' });
 }
