@@ -53,7 +53,7 @@ export const getAllUsersQuerySchema = z.object({
 
 export const getOrDeleteUserByIdParamsSchema = z.object({
   userId: z
-    .string()
+    .string('User ID is required.')
     .trim()
     .refine((value) => Types.ObjectId.isValid(value), 'Invalid user ID'),
 });

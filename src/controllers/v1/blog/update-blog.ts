@@ -7,7 +7,7 @@ import User from 'models/user';
 import { Types } from 'mongoose';
 import {
   updateBlogBodySchema,
-  updateBlogParamsSchema,
+  updateDeleteBlogParamsSchema,
 } from './validations/blog-validation-schemas';
 
 export async function updateBlog(
@@ -16,7 +16,7 @@ export async function updateBlog(
 ): Promise<void> {
   try {
     const userId = request.user.sub;
-    const { blogId } = updateBlogParamsSchema.parse(request.params);
+    const { blogId } = updateDeleteBlogParamsSchema.parse(request.params);
 
     const { fields, fileBuffer } = await parseMultipart('put', request, reply);
     const { title, content, status } = updateBlogBodySchema.parse(fields);

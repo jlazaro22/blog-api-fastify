@@ -3,6 +3,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { authRoutes } from './auth';
 import { userRoutes } from './user';
 import { blogRoutes } from './blog';
+import { likeRoutes } from './like';
 
 export async function v1Routes(app: FastifyInstance) {
   app.get('/', (request: FastifyRequest, reply: FastifyReply) => {
@@ -18,4 +19,5 @@ export async function v1Routes(app: FastifyInstance) {
   app.register(authRoutes, { prefix: '/auth' });
   app.register(userRoutes, { prefix: '/users' });
   app.register(blogRoutes, { prefix: '/blogs' });
+  app.register(likeRoutes, { prefix: '/likes' });
 }

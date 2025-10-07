@@ -4,10 +4,10 @@ import z from 'zod';
 
 export const createBlogBodySchema = z.object({
   title: z
-    .string()
+    .string('Title is required.')
     .trim()
     .max(180, 'Title must be less than 180 characters long'),
-  content: z.string(),
+  content: z.string('Content is required.'),
   status: z
     .enum(
       ['draft', 'published'],
@@ -37,14 +37,14 @@ export const getBlogBySlugParamsSchema = z.object({
 
 export const getBlogsByUserIdParamsSchema = z.object({
   userId: z
-    .string()
+    .string('User ID is required.')
     .trim()
     .refine((value) => Types.ObjectId.isValid(value), 'Invalid user ID'),
 });
 
-export const updateBlogParamsSchema = z.object({
+export const updateDeleteBlogParamsSchema = z.object({
   blogId: z
-    .string()
+    .string('Blog ID is required.')
     .trim()
     .refine((value) => Types.ObjectId.isValid(value), 'Invalid blog ID'),
 });
