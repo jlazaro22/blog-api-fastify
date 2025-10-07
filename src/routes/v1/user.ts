@@ -17,22 +17,17 @@ export async function userRoutes(app: FastifyInstance) {
     { onRequest: [authorize(['admin', 'user'])] },
     getCurrentUser,
   );
-
   app.put(
     '/current',
     { onRequest: [authorize(['admin', 'user'])] },
     updateCurrentUser,
   );
-
   app.delete(
     '/current',
     { onRequest: [authorize(['admin', 'user'])] },
     deleteCurrentUser,
   );
-
   app.get('/', { onRequest: [authorize(['admin'])] }, getAllUsers);
-
   app.get('/:userId', { onRequest: [authorize(['admin'])] }, getUserById);
-
   app.delete('/:userId', { onRequest: [authorize(['admin'])] }, deleteUserById);
 }

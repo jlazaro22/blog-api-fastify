@@ -14,8 +14,15 @@ export async function createBlog(
   const userId = request.user.sub;
 
   try {
-    const { fields, fileBuffer } = await parseMultipart(request, reply);
+    const { fields, fileBuffer } = await parseMultipart('post', request, reply);
     const { title, content, status } = createBlogBodySchema.parse(fields);
+
+    if (!fileBuffer) {
+      return reply.code(400).send({
+        code: 'ValidationError',
+        message: 'Blog banner image is required.',
+      });
+    }
 
     const data = await uploadToCloudinary(fileBuffer, '');
 

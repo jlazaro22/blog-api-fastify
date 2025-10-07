@@ -10,17 +10,13 @@ const purify = DOMPurify(window);
 
 export const multipartOptions: FastifyMultipartOptions = {
   limits: {
-    // fieldNameSize: 100, // Max field name size in bytes
-    // fieldSize: 100, // Max field value size in bytes
-    // fields: 10, // Max number of non-file fields
     files: 1, // Max number of file fields
     fileSize: 2 * 1024 * 1024, // 2 MB // For multipart forms, the max file size in bytes
-    // headerPairs: 2000, // Max number of header key=>value pairs
-    // parts: 1000,
   },
 };
 
 export async function parseMultipart(
+  method: 'post' | 'put',
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
@@ -42,11 +38,8 @@ export async function parseMultipart(
       }
     }
 
-    if (!fileBuffer) {
-      return reply.code(400).send({
-        code: 'ValidationError',
-        message: 'Blog banner image is required.',
-      });
+    if (method === 'put' && !fileBuffer) {
+      return { fields };
     }
 
     return { fields, fileBuffer };
@@ -57,6 +50,13 @@ export async function parseMultipart(
       return reply.code(413).send({
         code: 'ValidationError',
         message: 'Blog banner image size must be less than 2MB.',
+      });
+    }
+
+    if (err instanceof app.multipartErrors.FilesLimitError) {
+      return reply.code(400).send({
+        code: 'ValidationError',
+        message: 'A single file is accepted for the blog banner image.',
       });
     }
 
