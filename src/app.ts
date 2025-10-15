@@ -18,18 +18,17 @@ import { v1Routes } from 'routes/v1';
 export const app: FastifyInstance = await fastify(getLoggerOptions());
 
 // *** Plugins ***
-app.register(fastifyCors, corsOptions);
-app.register(fastifyFormbody);
-app.register(fastifyMultipart, multipartOptions);
-app.register(fastifyJwt, jwtOptions);
-app.register(fastifyCookie);
-// only compress responses larger than 1KB
-app.register(fastifyCompress, { global: true, threshold: 1024 });
-app.register(fastifyHelmet);
+await app.register(fastifyCors, corsOptions);
+await app.register(fastifyFormbody);
+await app.register(fastifyMultipart, multipartOptions);
+await app.register(fastifyJwt, jwtOptions);
+await app.register(fastifyCookie);
+await app.register(fastifyCompress, { global: true, threshold: 1024 }); // only compress responses larger than 1KB
+await app.register(fastifyHelmet);
 await app.register(fastifyRateLimit, rateLimitOptions);
-
-// *** Routes ***
-await app.register(v1Routes, { prefix: '/api/v1' });
 
 // *** Error handling ***
 customErrorHandler();
+
+// *** Routes ***
+await app.register(v1Routes, { prefix: '/api/v1' });

@@ -60,5 +60,6 @@ export const updateBlogBodySchema = z.object({
       ['draft', 'published'],
       'Status must be either "draft" or "published"',
     )
-    .optional(),
+    .optional()
+    .default('draft'),
 });

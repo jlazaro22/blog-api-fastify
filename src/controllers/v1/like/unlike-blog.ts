@@ -47,7 +47,7 @@ export async function unlikeBlog(
     await blog.save();
     app.log.info(
       { userId, blogId: blog._id, likesCount: blog.likesCount },
-      'Blo unliked successfully.',
+      'Blog unliked successfully.',
     );
 
     reply.code(204);

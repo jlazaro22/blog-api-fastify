@@ -1,6 +1,8 @@
 import { app } from 'app';
+import { v2 as cloudinary } from 'cloudinary';
 import { env } from 'env';
 import { FastifyReply, FastifyRequest } from 'fastify';
+import Blog from 'models/blog';
 import Token from 'models/token';
 import User from 'models/user';
 
@@ -11,7 +13,26 @@ export async function deleteCurrentUser(
   const userId = request.user.sub;
 
   try {
-    // TODO: delete <blogs> created by the user and corresponding <banner> images uploaded to cloudinary
+    const blogs = await Blog.find({ author: userId })
+      .select('banner.publicId')
+      .lean()
+      .exec();
+
+    const publicIds = blogs.map(({ banner }) => banner.publicId);
+
+    if (publicIds?.length) {
+      await cloudinary.api.delete_resources(publicIds);
+    }
+
+    app.log.info(
+      {
+        publicIds,
+      },
+      'Multiple blog banners deleted from Cloudinary.',
+    );
+
+    await Blog.deleteMany({ author: userId });
+    app.log.info({ userId, blogs }, 'Multiple blogs deleted.');
 
     await User.deleteOne({ _id: userId });
     app.log.info({ userId }, 'User account deleted successfully.');

@@ -29,12 +29,7 @@ export async function parseMultipart(
       if (part.type === 'file') {
         fileBuffer = await part.toBuffer();
       } else {
-        if (part.fieldname === 'content') {
-          fields[part.fieldname] = purify.sanitize(part.value as string | Node);
-          continue;
-        }
-
-        fields[part.fieldname] = part.value;
+        fields[part.fieldname] = purify.sanitize(part.value as string);
       }
     }
 
